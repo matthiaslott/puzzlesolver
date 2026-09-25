@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PuzzleSolver</string>
+    <!-- Destination Strings -->
+    <string name="sudoku_label">Sudoku</string>
+    <string name="sudoku_title">Sudoku Solver</string>
+    <string name="tbd_label">TBD</string>
+    <string name="tbd_title">TBD</string>
+</resources>
