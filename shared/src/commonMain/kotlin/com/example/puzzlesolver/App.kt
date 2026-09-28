@@ -26,6 +26,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.puzzlesolver.sudoku.ui.SudokuScreen
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -42,7 +43,7 @@ enum class Destinations(
     val screen: @Composable () -> Unit
 ) {
     Sudoku(Res.string.sudoku_label, Res.string.sudoku_title, Icons.Default.Grid3x3,
-        { Text("Sudoku") }
+        { SudokuScreen() }
     ),
     TBD(Res.string.tbd_label, Res.string.tbd_title, Icons.Default.QuestionMark,
         { Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { Text("TBD") } }
@@ -55,44 +56,47 @@ fun App() {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = Destinations.valueOf(backStackEntry?.destination?.route ?: Destinations.entries.first().name)
-    MaterialTheme(
-        colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()
-    ) {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text(stringResource(currentDestination.title)) },
-                )
-            },
-            bottomBar = {
-                NavigationBar() {
-                    Destinations.entries.forEach { destination ->
-                        NavigationBarItem(
-                            onClick = { navController.navigate(destination.name) {
-                                popUpTo(navController.graph.findStartDestination().id)
-                                launchSingleTop = true
-                            } },
-                            selected = currentDestination.name == destination.name,
-                            icon = {
-                                Icon(
-                                    destination.icon,
-                                    contentDescription = stringResource(destination.label)
-                                )
-                            },
-                            label = { Text(stringResource(destination.label)) }
-                        )
+    //
+    CompositionLocalProvider(LocalCustomColors provides (if (isSystemInDarkTheme()) DarkCustomColors else LightCustomColors)) {
+        MaterialTheme(
+            colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()
+        ) {
+            Scaffold(
+                topBar = {
+                    TopAppBar(
+                        title = { Text(stringResource(currentDestination.title)) },
+                    )
+                },
+                bottomBar = {
+                    NavigationBar() {
+                        Destinations.entries.forEach { destination ->
+                            NavigationBarItem(
+                                onClick = { navController.navigate(destination.name) {
+                                    popUpTo(navController.graph.findStartDestination().id)
+                                    launchSingleTop = true
+                                } },
+                                selected = currentDestination.name == destination.name,
+                                icon = {
+                                    Icon(
+                                        destination.icon,
+                                        contentDescription = stringResource(destination.label)
+                                    )
+                                },
+                                label = { Text(stringResource(destination.label)) }
+                            )
+                        }
                     }
                 }
-            }
-        ) { innerPadding ->
-            NavHost(
-                navController = navController,
-                startDestination = Destinations.entries.first().name,
-                modifier = Modifier.padding(innerPadding)
-            ) {
-                Destinations.entries.forEach { destination ->
-                    composable(destination.name) {
-                        destination.screen()
+            ) { innerPadding ->
+                NavHost(
+                    navController = navController,
+                    startDestination = Destinations.entries.first().name,
+                    modifier = Modifier.padding(innerPadding)
+                ) {
+                    Destinations.entries.forEach { destination ->
+                        composable(destination.name) {
+                            destination.screen()
+                        }
                     }
                 }
             }

@@ -1,4 +1,0 @@
-package com.example.puzzlesolver
-
-fun sayHello(to: String): String =
-    "Hello, $to!"

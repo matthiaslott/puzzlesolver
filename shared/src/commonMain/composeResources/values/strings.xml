@@ -5,4 +5,8 @@
     <string name="sudoku_title">Sudoku Solver</string>
     <string name="tbd_label">TBD</string>
     <string name="tbd_title">TBD</string>
+    <!-- Sudoku -->
+    <string name="suggestion">Suggestion</string>
+    <string name="reset">Reset Sudoku</string>
+    <string name="step">Apply Suggestion</string>
 </resources>

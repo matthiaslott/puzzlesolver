@@ -71,6 +71,7 @@ kotlin {
             // CUSTOM
             implementation(libs.material.icons.extended)
             implementation(libs.navigation.compose)
+            implementation(libs.kotlinx.collections.immutable)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
