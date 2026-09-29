@@ -1,3 +1,28 @@
+# PuzzleSolver
+
+Heuristics-based Sudoku solver written in Kotlin using Compose Multiplatform.
+It assists users when solving Sudokus by suggesting reasoning steps for progressing the game.
+The suggestions are visualised on the board to foster understanding of the techniques.
+
+<p align="center">
+  <img src="illustrations/hidden_single.png" width="24%"/>
+  <img src="illustrations/intersection.png" width="24%"/>
+  <img src="illustrations/solved.png" width="24%"/>
+  <img src="illustrations/video.gif" width="24%"/>
+</p>
+
+Currently Supported Heuristics:
+- [Naked Single](https://sudokubliss.com/guides/naked-singles-technique),
+  [Naked Pair](https://sudokubliss.com/guides/naked-pairs-triples-quads) and
+  [Naked Triple](https://sudokubliss.com/guides/naked-pairs-triples-quads)
+- [Hidden Single](https://sudokubliss.com/guides/hidden-singles-technique),
+  [Hidden Pair](https://sudokubliss.com/guides/hidden-pairs-technique) and
+  [Hidden Triple](https://sudokubliss.com/guides/hidden-triples)
+- [Intersection](https://sudokubliss.com/guides/locked-candidates-or-box-column-row-interactions)
+
+
+## Compose Multiplatform Information
+
 This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop (JVM).
 
 * [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
